@@ -1,0 +1,13 @@
+name: Keep Supabase active
+on:
+  schedule:
+    - cron: "0 6 */3 * *"   # every 3 days
+  workflow_dispatch:
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          curl -sS -o /dev/null -w "%{http_code}\n" \
+            "https://xsjwmqmdbrfpkhpnodsu.supabase.co/rest/v1/att_workers?select=id&limit=1" \
+            -H "apikey: sb_publishable_PPogPICjnAHv5dz-_G-MDw_sRzgGhUe"
